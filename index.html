@@ -6,860 +6,762 @@
 <title>Sahithi Kadudula — Data Analyst</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#EEF0EA;
-    --paper-alt:#E5E8DF;
-    --ink:#1C2321;
-    --ink-soft:#4A524C;
-    --teal:#14453D;
-    --teal-ink:#EDF3F1;
-    --amber:#E2A63B;
-    --coral:#C4553C;
-    --line:#C9CDBF;
-    --serif:'Fraunces', serif;
+    --bg:#FBFAF7;
+    --surface:#FFFFFF;
+    --ink:#191B22;
+    --ink-soft:#5C6070;
+    --teal:#0E7C6E;
+    --indigo:#4F5FD1;
+    --amber:#F2A93B;
+    --line:#EAE8E1;
+    --shadow:0 18px 40px -20px rgba(25,27,34,0.18);
     --sans:'Inter', sans-serif;
+    --display:'Sora', sans-serif;
     --mono:'IBM Plex Mono', monospace;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
   body{
-    background:var(--paper);
+    background:var(--bg);
     color:var(--ink);
     font-family:var(--sans);
-    line-height:1.55;
+    line-height:1.6;
     -webkit-font-smoothing:antialiased;
   }
-  a{color:inherit;}
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
   ::selection{background:var(--amber); color:var(--ink);}
-
-  /* Accessible focus visibility */
   a:focus-visible, button:focus-visible, summary:focus-visible{
-    outline:2px solid var(--coral);
+    outline:2px solid var(--indigo);
     outline-offset:3px;
   }
+  @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
 
-  @media (prefers-reduced-motion: reduce){
-    *{animation:none !important; transition:none !important;}
-  }
+  section, header, footer{ scroll-margin-top:90px; }
 
-  /* ---------- Layout shell ---------- */
-  .shell{
-    display:grid;
-    grid-template-columns:260px 1fr;
-    min-height:100vh;
-  }
-  @media (max-width: 900px){
-    .shell{grid-template-columns:1fr;}
-  }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 2rem; }
+  @media (max-width:700px){ .wrap{padding:0 1.25rem;} }
 
-  /* ---------- Left rail ---------- */
-  .rail{
-    background:var(--teal);
-    color:var(--teal-ink);
-    position:sticky;
-    top:0;
-    height:100vh;
-    padding:2.5rem 2rem;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-  }
-  @media (max-width: 900px){
-    .rail{position:relative; height:auto; padding:1.75rem 1.5rem;}
-  }
-  .rail-top .mark{
-    font-family:var(--serif);
-    font-size:1.4rem;
-    font-weight:500;
-    letter-spacing:0.01em;
-  }
-  .rail-top .role{
-    font-family:var(--mono);
-    font-size:0.78rem;
-    color:var(--amber);
-    margin-top:0.35rem;
-  }
-  .rail-nav{
-    margin-top:3rem;
-    list-style:none;
-    display:flex;
-    flex-direction:column;
-    gap:0.15rem;
-  }
-  @media (max-width: 900px){
-    .rail-nav{
-      margin-top:1.25rem;
-      flex-direction:row;
-      flex-wrap:wrap;
-      gap:0.5rem 1rem;
-    }
-  }
-  .rail-nav a{
-    text-decoration:none;
-    font-size:0.95rem;
-    color:rgba(237,243,241,0.65);
-    padding:0.55rem 0;
-    border-bottom:1px solid rgba(237,243,241,0.12);
-    transition:color .15s ease, padding-left .15s ease;
-    display:block;
-  }
-  @media (max-width: 900px){
-    .rail-nav a{border-bottom:none; padding:0.2rem 0;}
-  }
-  .rail-nav a:hover, .rail-nav a:focus-visible{
-    color:var(--paper);
-    padding-left:0.35rem;
-  }
-  .rail-foot{
-    font-family:var(--mono);
-    font-size:0.72rem;
-    color:rgba(237,243,241,0.45);
-    line-height:1.7;
-  }
-  @media (max-width: 900px){ .rail-foot{display:none;} }
-
-  /* ---------- Main content ---------- */
-  main{
-    padding:0;
-  }
-  section{
-    padding:5.5rem 4rem;
+  /* ---------- Top navbar ---------- */
+  .navbar{
+    position:sticky; top:0; z-index:50;
+    background:rgba(251,250,247,0.85);
+    backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
-    max-width:1100px;
   }
-  @media (max-width: 900px){
-    section{padding:3.25rem 1.5rem;}
+  .navbar .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:1.1rem; padding-bottom:1.1rem;
   }
-  section:last-of-type{border-bottom:none;}
-
-  .kicker{
-    font-family:var(--mono);
-    font-size:0.78rem;
-    color:var(--coral);
-    margin-bottom:0.9rem;
+  .brand{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:1.15rem;
   }
-  h2{
-    font-family:var(--serif);
+  .navlinks{
+    display:flex; align-items:center; gap:2rem;
+    list-style:none;
+  }
+  .navlinks a{
+    font-size:0.95rem;
     font-weight:500;
-    font-size:clamp(1.6rem, 2.6vw, 2.1rem);
-    margin-bottom:2rem;
-    max-width:22ch;
+    color:var(--ink-soft);
+    position:relative;
+    padding:0.25rem 0;
   }
+  .navlinks a:hover{ color:var(--ink); }
+  .navlinks a::after{
+    content:'';
+    position:absolute; left:0; right:0; bottom:-2px;
+    height:2px; background:var(--indigo);
+    transform:scaleX(0); transform-origin:left;
+    transition:transform .18s ease;
+  }
+  .navlinks a:hover::after{ transform:scaleX(1); }
+  .nav-cta{
+    background:var(--ink); color:#fff !important;
+    padding:0.6rem 1.3rem; border-radius:999px;
+    font-weight:600; font-size:0.9rem;
+  }
+  .nav-toggle{ display:none; }
+  @media (max-width:820px){
+    .navlinks{
+      position:fixed; inset:66px 1rem auto 1rem;
+      background:var(--surface);
+      border:1px solid var(--line);
+      border-radius:16px;
+      flex-direction:column;
+      align-items:flex-start;
+      padding:1.2rem 1.4rem;
+      box-shadow:var(--shadow);
+      gap:0.9rem;
+      transform:translateY(-12px);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .18s ease, transform .18s ease;
+    }
+    .nav-toggle:checked ~ .navlinks{
+      transform:translateY(0);
+      opacity:1;
+      pointer-events:auto;
+    }
+    .burger{
+      display:flex; flex-direction:column; gap:5px; cursor:pointer;
+      width:26px;
+    }
+    .burger span{ height:2px; background:var(--ink); border-radius:2px; }
+  }
+  @media (min-width:821px){ .burger{ display:none; } }
 
   /* ---------- Hero ---------- */
-  #hero{
-    padding-top:5rem;
+  #home{
+    position:relative;
+    padding:5.5rem 0 5rem;
+    overflow:hidden;
   }
-  #hero h1{
-    font-family:var(--serif);
-    font-weight:500;
-    font-size:clamp(2.4rem, 5.4vw, 4.1rem);
+  .blob{
+    position:absolute;
+    top:-140px; right:-160px;
+    width:520px; height:520px;
+    border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, var(--teal), var(--indigo) 70%);
+    opacity:0.16;
+    filter:blur(10px);
+    z-index:0;
+  }
+  .hero-inner{
+    position:relative; z-index:1;
+    display:grid;
+    grid-template-columns:1fr 260px;
+    gap:3rem;
+    align-items:center;
+  }
+  @media (max-width:820px){ .hero-inner{grid-template-columns:1fr;} }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:0.5rem;
+    font-family:var(--mono);
+    font-size:0.78rem;
+    color:var(--teal);
+    background:rgba(14,124,110,0.08);
+    padding:0.4rem 0.85rem;
+    border-radius:999px;
+    margin-bottom:1.4rem;
+  }
+  .eyebrow .dot{ width:6px; height:6px; border-radius:50%; background:var(--teal); }
+  h1{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(2.4rem, 5.2vw, 3.6rem);
     line-height:1.08;
-    max-width:14ch;
-    letter-spacing:-0.01em;
+    letter-spacing:-0.02em;
+    max-width:16ch;
   }
-  #hero .lede{
-    margin-top:1.6rem;
-    max-width:56ch;
+  .hero-inner .lede{
+    margin-top:1.4rem;
     font-size:1.08rem;
     color:var(--ink-soft);
+    max-width:52ch;
   }
-  .stat-row{
-    margin-top:3rem;
-    display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    border-top:1px solid var(--line);
+  .hero-cta{
+    display:flex; gap:0.9rem; margin-top:2.2rem; flex-wrap:wrap;
   }
-  @media (max-width: 700px){
-    .stat-row{grid-template-columns:repeat(2, 1fr);}
+  .btn{
+    display:inline-flex; align-items:center; gap:0.5rem;
+    padding:0.85rem 1.6rem;
+    border-radius:999px;
+    font-weight:600; font-size:0.95rem;
   }
-  .stat{
-    padding:1.4rem 1.4rem 1.4rem 0;
-    border-right:1px solid var(--line);
+  .btn-primary{ background:var(--ink); color:#fff; }
+  .btn-primary:hover{ background:#000; }
+  .btn-outline{ border:1.5px solid var(--line); }
+  .btn-outline:hover{ border-color:var(--ink); }
+
+  .avatar-card{
+    aspect-ratio:1/1.05;
+    border-radius:28px;
+    background:linear-gradient(160deg, var(--teal), var(--indigo));
+    display:flex; align-items:flex-end;
+    padding:1.4rem;
+    box-shadow:var(--shadow);
   }
-  .stat:last-child{border-right:none;}
-  .stat .num{
+  .avatar-card .tag{
+    color:#fff;
     font-family:var(--mono);
-    font-size:1.7rem;
-    color:var(--teal);
+    font-size:0.78rem;
+    line-height:1.5;
   }
-  .stat .label{
+
+  .stat-strip{
+    margin-top:3.5rem;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1rem;
+  }
+  @media (max-width:700px){ .stat-strip{grid-template-columns:repeat(2,1fr);} }
+  .stat-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:1.3rem 1.4rem;
+  }
+  .stat-card .num{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:1.7rem;
+    color:var(--indigo);
+  }
+  .stat-card .label{
     margin-top:0.3rem;
     font-size:0.85rem;
     color:var(--ink-soft);
   }
 
-  /* ---------- About text block ---------- */
+  .hero-about{
+    margin-top:3rem;
+    padding-top:3rem;
+    border-top:1px solid var(--line);
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2rem;
+  }
+  @media (max-width:820px){ .hero-about{grid-template-columns:1fr; gap:1rem;} }
+  .hero-about p{
+    font-size:1.02rem;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- Section shell ---------- */
+  section{ padding:5rem 0; }
+  .section-head{ margin-bottom:2.5rem; }
+  .section-head .eyebrow{ margin-bottom:1rem; }
+  h2{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(1.7rem, 3vw, 2.3rem);
+  }
+
+  /* ---------- About ---------- */
   #about p{
-    max-width:62ch;
+    max-width:66ch;
     font-size:1.05rem;
     color:var(--ink-soft);
   }
-  #about p + p{margin-top:1.1rem;}
+  #about p + p{ margin-top:1.1rem; }
 
   /* ---------- Skills ---------- */
-  .skill-ledger{
-    display:grid;
-    gap:0;
-  }
-  .skill-row{
-    display:grid;
-    grid-template-columns:220px 1fr;
-    gap:1.5rem;
-    padding:1.1rem 0;
-    border-top:1px solid var(--line);
-  }
-  @media (max-width: 700px){
-    .skill-row{grid-template-columns:1fr; gap:0.4rem;}
-  }
-  .skill-row:last-child{border-bottom:1px solid var(--line);}
-  .skill-row .cat{
-    font-family:var(--mono);
-    font-size:0.85rem;
-    color:var(--coral);
-    padding-top:0.15rem;
-  }
-  .skill-row .items{
-    display:flex;
-    flex-wrap:wrap;
-    gap:0.5rem 1.4rem;
-    font-size:0.98rem;
-  }
-
-  /* ---------- Projects ---------- */
-  .ledger{
-    border-top:1px solid var(--line);
-  }
-  .ledger-item{
-    border-bottom:1px solid var(--line);
-  }
-  .ledger-item summary{
-    list-style:none;
-    cursor:pointer;
-    display:grid;
-    grid-template-columns:1fr auto auto;
-    align-items:center;
-    gap:1.5rem;
-    padding:1.35rem 0;
-  }
-  @media (max-width: 700px){
-    .ledger-item summary{grid-template-columns:1fr auto;}
-  }
-  .ledger-item summary::-webkit-details-marker{display:none;}
-  .ledger-item .title{
-    font-family:var(--serif);
-    font-size:1.15rem;
-    font-weight:500;
-  }
-  .ledger-item .tagline{
-    display:block;
-    font-size:0.88rem;
-    color:var(--ink-soft);
-    margin-top:0.25rem;
-    font-weight:400;
-    font-family:var(--sans);
-  }
-  .ledger-item .stack{
-    font-family:var(--mono);
-    font-size:0.78rem;
-    color:var(--ink-soft);
-    white-space:nowrap;
-  }
-  @media (max-width: 700px){ .ledger-item .stack{display:none;} }
-  .chevron{
-    width:11px; height:11px;
-    border-right:2px solid var(--ink);
-    border-bottom:2px solid var(--ink);
-    transform:rotate(45deg);
-    transition:transform .2s ease;
-    flex-shrink:0;
-  }
-  .ledger-item[open] .chevron{ transform:rotate(-135deg); }
-  .ledger-item .panel{
-    padding:0 0 1.75rem;
-    display:grid;
-    grid-template-columns:200px 1fr;
-    gap:1.75rem;
-  }
-  @media (max-width: 700px){
-    .ledger-item .panel{grid-template-columns:1fr;}
-  }
-  .ledger-item .panel img{
-    width:100%;
-    border-radius:4px;
-    display:block;
-    border:1px solid var(--line);
-  }
-  .ledger-item .panel p{
-    color:var(--ink-soft);
-    font-size:0.98rem;
-    max-width:60ch;
-  }
-  .ledger-item .panel .stack-mobile{
-    display:none;
-    font-family:var(--mono);
-    font-size:0.78rem;
-    color:var(--ink-soft);
-    margin-top:0.75rem;
-  }
-  @media (max-width: 700px){ .ledger-item .panel .stack-mobile{display:block;} }
-  .view-link{
-    display:inline-block;
-    margin-top:1rem;
+  .skill-block{ margin-bottom:1.6rem; }
+  .skill-block h3{
     font-family:var(--mono);
     font-size:0.85rem;
     color:var(--teal);
-    text-decoration:underline;
-    text-underline-offset:3px;
+    margin-bottom:0.8rem;
+    font-weight:500;
+  }
+  .pill-row{ display:flex; flex-wrap:wrap; gap:0.6rem; }
+  .pill{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:0.5rem 1.05rem;
+    font-size:0.9rem;
+    font-weight:500;
   }
 
-  /* ---------- Experience timeline ---------- */
+  /* ---------- Projects grid ---------- */
+  .project-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1.5rem;
+  }
+  @media (max-width:960px){ .project-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:640px){ .project-grid{grid-template-columns:1fr;} }
+  .project-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:20px;
+    overflow:hidden;
+    display:flex; flex-direction:column;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .project-card:hover{
+    transform:translateY(-4px);
+    box-shadow:var(--shadow);
+  }
+  .project-card .thumb{
+    aspect-ratio:16/10;
+    background:linear-gradient(135deg, #EDEBE3, #E3E7DE);
+    overflow:hidden;
+  }
+  .project-card .thumb img{ width:100%; height:100%; object-fit:cover; }
+  .project-card .body{ padding:1.3rem 1.4rem 1.5rem; flex:1; display:flex; flex-direction:column; }
+  .project-card h3{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:1.08rem;
+    margin-bottom:0.5rem;
+  }
+  .project-card p{
+    font-size:0.92rem;
+    color:var(--ink-soft);
+    flex:1;
+  }
+  .project-card .tags{
+    display:flex; flex-wrap:wrap; gap:0.4rem;
+    margin:0.9rem 0 1rem;
+  }
+  .project-card .tags span{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    color:var(--teal);
+    background:rgba(14,124,110,0.08);
+    border-radius:999px;
+    padding:0.25rem 0.65rem;
+  }
+  .project-card .go{
+    font-weight:600; font-size:0.88rem; color:var(--indigo);
+  }
+  .project-card .go:hover{ text-decoration:underline; }
+
+  /* ---------- Experience ---------- */
   .timeline{
-    border-top:1px solid var(--line);
+    display:flex; flex-direction:column; gap:0;
   }
   .tl-item{
     display:grid;
-    grid-template-columns:170px 1fr;
-    gap:1.75rem;
+    grid-template-columns:150px 1fr;
+    gap:2rem;
     padding:2rem 0;
-    border-bottom:1px solid var(--line);
+    border-top:1px solid var(--line);
   }
-  @media (max-width: 700px){
-    .tl-item{grid-template-columns:1fr; gap:0.4rem;}
-  }
+  @media (max-width:700px){ .tl-item{grid-template-columns:1fr; gap:0.4rem;} }
+  .timeline .tl-item:last-child{ border-bottom:1px solid var(--line); }
   .tl-item .when{
     font-family:var(--mono);
     font-size:0.82rem;
-    color:var(--coral);
+    color:var(--indigo);
     padding-top:0.3rem;
   }
   .tl-item h3{
-    font-family:var(--serif);
-    font-weight:500;
-    font-size:1.2rem;
+    font-family:var(--display);
+    font-weight:600;
+    font-size:1.15rem;
   }
-  .tl-item .org{
-    font-size:0.92rem;
-    color:var(--ink-soft);
-    margin-top:0.15rem;
-    margin-bottom:0.9rem;
-  }
-  .tl-item ul{
-    padding-left:1.1rem;
-    color:var(--ink-soft);
-    font-size:0.97rem;
-    display:flex;
-    flex-direction:column;
-    gap:0.45rem;
-  }
-  .tl-item mark{
-    background:none;
-    color:var(--teal);
-    font-family:var(--mono);
-    font-weight:500;
-    padding:0 0.1em;
-  }
+  .tl-item .org{ font-size:0.92rem; color:var(--ink-soft); margin-top:0.15rem; margin-bottom:0.9rem; }
+  .tl-item ul{ padding-left:1.1rem; color:var(--ink-soft); font-size:0.96rem; display:flex; flex-direction:column; gap:0.45rem; }
+  .tl-item mark{ background:none; color:var(--teal); font-family:var(--mono); font-weight:500; padding:0 0.1em; }
 
   /* ---------- Education / Certifications ---------- */
-  .two-col{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:3rem;
+  .grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:3rem; }
+  @media (max-width:800px){ .grid-2{grid-template-columns:1fr; gap:2.5rem;} }
+  .info-card{
+    background:var(--surface); border:1px solid var(--line);
+    border-radius:18px; padding:1.4rem 1.5rem; margin-bottom:1rem;
   }
-  @media (max-width: 800px){ .two-col{grid-template-columns:1fr; gap:2.5rem;} }
-  .edu-row{
-    border-top:1px solid var(--line);
-    padding:1.25rem 0;
-  }
-  .edu-row:last-child{border-bottom:1px solid var(--line);}
-  .edu-row h3{
-    font-family:var(--serif);
-    font-weight:500;
-    font-size:1.05rem;
-  }
-  .edu-row .org{font-size:0.92rem; color:var(--ink-soft); margin-top:0.2rem;}
-  .edu-row .when{font-family:var(--mono); font-size:0.8rem; color:var(--coral); margin-top:0.3rem;}
+  .info-card h3{ font-family:var(--display); font-weight:600; font-size:1.02rem; }
+  .info-card .org{ font-size:0.9rem; color:var(--ink-soft); margin-top:0.25rem; }
+  .info-card .when{ font-family:var(--mono); font-size:0.78rem; color:var(--indigo); margin-top:0.4rem; }
 
-  .cert-list{list-style:none;}
-  .cert-list li{
-    border-top:1px solid var(--line);
-    padding:1rem 0;
-    font-size:0.98rem;
+  .cert-grid{ display:flex; flex-direction:column; gap:0.7rem; }
+  .cert-card{
+    background:var(--surface); border:1px solid var(--line);
+    border-radius:14px; padding:0.95rem 1.2rem;
+    font-size:0.95rem; font-weight:500;
+    display:flex; align-items:center; gap:0.75rem;
   }
-  .cert-list li:last-child{border-bottom:1px solid var(--line);}
+  .cert-card .chip{
+    width:8px; height:8px; border-radius:50%; background:var(--amber); flex-shrink:0;
+  }
 
   /* ---------- Contact ---------- */
   #contact{
-    background:var(--teal);
-    color:var(--teal-ink);
-    border-bottom:none;
-    max-width:none;
+    background:linear-gradient(160deg, var(--teal), var(--indigo));
+    border-radius:32px;
+    margin:0 auto 5rem;
+    max-width:1180px;
+    padding:4.5rem 3rem;
+    color:#fff;
+    text-align:center;
   }
-  #contact .kicker{color:var(--amber);}
-  #contact h2{color:var(--paper);}
-  #contact .lede{
-    max-width:52ch;
-    color:rgba(237,243,241,0.75);
-    font-size:1.05rem;
-    margin-bottom:2.5rem;
+  @media (max-width:700px){ #contact{ border-radius:22px; padding:3rem 1.5rem; margin-bottom:3rem; } }
+  #contact .eyebrow{ background:rgba(255,255,255,0.15); color:#fff; margin:0 auto 1.2rem; width:fit-content; }
+  #contact .eyebrow .dot{ background:#fff; }
+  #contact h2{ color:#fff; }
+  #contact p{ color:rgba(255,255,255,0.85); max-width:44ch; margin:1rem auto 2.2rem; font-size:1.05rem; }
+  .contact-buttons{ display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; }
+  .contact-buttons a{
+    background:#fff; color:var(--ink);
+    padding:0.9rem 1.8rem; border-radius:999px; font-weight:600;
   }
-  .contact-grid{
-    display:grid;
-    grid-template-columns:repeat(2, minmax(220px, 1fr));
-    gap:0.75rem 3rem;
-    max-width:640px;
+  .contact-buttons a.ghost{
+    background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,0.5);
   }
-  @media (max-width:600px){ .contact-grid{grid-template-columns:1fr;} }
-  .contact-grid a{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    text-decoration:none;
-    padding:0.9rem 0;
-    border-bottom:1px solid rgba(237,243,241,0.2);
-    font-size:1rem;
-  }
-  .contact-grid a span.arrow{
+
+  footer.site-foot{
+    text-align:center;
     font-family:var(--mono);
-    color:var(--amber);
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    padding-bottom:3rem;
   }
-  footer{
-    padding:1.5rem 4rem 2.5rem;
-    font-family:var(--mono);
-    font-size:0.75rem;
-    color:rgba(237,243,241,0.45);
-  }
-  @media (max-width: 900px){ footer{padding:1.5rem 1.5rem 2rem;} }
 </style>
 </head>
 <body>
 
-<div class="shell">
+<header class="navbar">
+  <div class="wrap">
+    <a class="brand" href="#home">Sahithi Kadudula</a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="burger"><span></span><span></span><span></span></label>
+    <ul class="navlinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact" class="nav-cta">Get in touch</a></li>
+    </ul>
+  </div>
+</header>
 
-  <!-- Left rail -->
-  <aside class="rail">
-    <div class="rail-top">
-      <div class="mark">Sahithi Kadudula</div>
-      <div class="role">Data Analyst</div>
-      <ul class="rail-nav">
-        <li><a href="#hero">Home</a></li>
-        <li><a href="#about">Background</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#certifications">Certifications</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </aside>
-
-  <main>
-
-    <!-- Hero / About -->
-    <section id="hero">
-      <div class="kicker">Data Analyst</div>
-      <h1>I turn raw data into decisions.</h1>
-      <p class="lede">
-        I build SQL and Python-based pipelines that process large-scale data, validate quality, and
-        surface the patterns that machine learning models and business dashboards actually need.
-        Currently at Mastercard, working across AWS, Azure, Snowflake, and Databricks.
-      </p>
-      <div class="stat-row">
-        <div class="stat">
-          <div class="num">3+</div>
-          <div class="label">years in data analytics</div>
-        </div>
-        <div class="stat">
-          <div class="num">30%</div>
-          <div class="label">improvement in data integrity</div>
-        </div>
-        <div class="stat">
-          <div class="num">$200K+</div>
-          <div class="label">revenue driven by dashboards</div>
-        </div>
-        <div class="stat">
-          <div class="num">50+</div>
-          <div class="label">predictive features shipped</div>
+<!-- Hero -->
+<section id="home">
+  <div class="blob"></div>
+  <div class="wrap">
+    <div class="hero-inner">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> Available for opportunities</div>
+        <h1>I turn raw data into decisions.</h1>
+        <p class="lede">
+          Data Analyst with 3+ years building SQL and Python-based pipelines across AWS, Azure,
+          Snowflake, and Databricks — working with Engineering, ML, and Product teams to deliver
+          analytics that hold up at scale.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#projects">View projects</a>
+          <a class="btn btn-outline" href="#contact">Get in touch</a>
         </div>
       </div>
-    </section>
+      <div class="avatar-card">
+        <div class="tag">Data Analyst<br>Austin, TX</div>
+      </div>
+    </div>
 
-    <section id="about">
-      <div class="kicker">About</div>
-      <h2>Background</h2>
+    <div class="stat-strip">
+      <div class="stat-card"><div class="num">3+</div><div class="label">years in data analytics</div></div>
+      <div class="stat-card"><div class="num">30%</div><div class="label">improvement in data integrity</div></div>
+      <div class="stat-card"><div class="num">$200K+</div><div class="label">revenue driven by dashboards</div></div>
+      <div class="stat-card"><div class="num">50+</div><div class="label">predictive features shipped</div></div>
+    </div>
+
+    <div class="hero-about">
       <p>
         I hold a Master's in Data Analytics and Information Systems from Texas State University and a
         Bachelor's in Computer Science from JNTU Hyderabad. My work sits at the intersection of data
-        engineering and analysis — I'm as comfortable tuning an ML cutoff framework as I am building the
-        Airflow pipeline that feeds it.
+        engineering and analysis — I'm as comfortable tuning a machine learning pipeline as I am building
+        the workflow that feeds it.
       </p>
       <p>
         Recent work spans data pipelines and analytics at Mastercard, financial ETL work at American
         Express, and academic analytics at Texas State University, with earlier experience building
         revenue and forecasting models at Cybage Software.
       </p>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <!-- Skills -->
-    <section id="skills">
-      <div class="kicker">Capabilities</div>
+<!-- Skills -->
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span> Capabilities</div>
       <h2>Skills</h2>
-      <div class="skill-ledger">
-        <div class="skill-row">
-          <div class="cat">Languages</div>
-          <div class="items"><span>Python</span><span>SQL</span><span>R</span></div>
-        </div>
-        <div class="skill-row">
-          <div class="cat">Data Engineering</div>
-          <div class="items">
-            <span>ETL / ELT pipelines</span><span>Apache Spark</span><span>PySpark</span>
-            <span>Delta Lake</span><span>Airflow</span><span>Azure Data Factory</span><span>Data validation &amp; QA</span>
-          </div>
-        </div>
-        <div class="skill-row">
-          <div class="cat">Databases &amp; Cloud</div>
-          <div class="items">
-            <span>Databricks</span><span>Snowflake</span><span>AWS</span><span>Azure</span>
-            <span>SQL Server</span><span>PostgreSQL</span><span>MySQL</span>
-          </div>
-        </div>
-        <div class="skill-row">
-          <div class="cat">ML &amp; AI</div>
-          <div class="items">
-            <span>XGBoost</span><span>Decision Trees</span><span>Random Forest</span>
-            <span>Regression</span><span>Feature Engineering</span><span>NLP (SpaCy)</span><span>Claude Code</span>
-          </div>
-        </div>
-        <div class="skill-row">
-          <div class="cat">Analytics &amp; BI</div>
-          <div class="items">
-            <span>Tableau</span><span>Power BI</span><span>Excel</span><span>IBM Cognos</span><span>KPI design</span>
-          </div>
-        </div>
-        <div class="skill-row">
-          <div class="cat">Tools</div>
-          <div class="items"><span>Git</span><span>VS Code</span><span>Jupyter</span><span>SAP</span></div>
-        </div>
-      </div>
-    </section>
+    </div>
 
-    <!-- Projects -->
-    <section id="projects">
-      <div class="kicker">Selected work</div>
+    <div class="skill-block">
+      <h3>Languages</h3>
+      <div class="pill-row">
+        <span class="pill">Python</span><span class="pill">SQL</span><span class="pill">R</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h3>Data Engineering</h3>
+      <div class="pill-row">
+        <span class="pill">ETL / ELT pipelines</span><span class="pill">Apache Spark</span>
+        <span class="pill">PySpark</span><span class="pill">Delta Lake</span>
+        <span class="pill">Airflow</span><span class="pill">Azure Data Factory</span>
+        <span class="pill">Data validation &amp; QA</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h3>Databases &amp; Cloud</h3>
+      <div class="pill-row">
+        <span class="pill">Databricks</span><span class="pill">Snowflake</span><span class="pill">AWS</span>
+        <span class="pill">Azure</span><span class="pill">SQL Server</span><span class="pill">PostgreSQL</span>
+        <span class="pill">MySQL</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h3>ML &amp; AI</h3>
+      <div class="pill-row">
+        <span class="pill">XGBoost</span><span class="pill">Decision Trees</span><span class="pill">Random Forest</span>
+        <span class="pill">Regression</span><span class="pill">Feature Engineering</span>
+        <span class="pill">NLP (SpaCy)</span><span class="pill">Claude Code</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h3>Analytics &amp; BI</h3>
+      <div class="pill-row">
+        <span class="pill">Tableau</span><span class="pill">Power BI</span><span class="pill">Excel</span>
+        <span class="pill">IBM Cognos</span><span class="pill">KPI design</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h3>Tools</h3>
+      <div class="pill-row">
+        <span class="pill">Git</span><span class="pill">VS Code</span><span class="pill">Jupyter</span><span class="pill">SAP</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span> Selected work</div>
       <h2>Projects</h2>
-      <div class="ledger">
+    </div>
+    <div class="project-grid">
 
-        <details class="ledger-item">
-          <summary>
-            <div>
-              <span class="title">YouTube Text Data Analysis</span>
-              <span class="tagline">Sentiment, word clouds, and engagement trends across comment data</span>
-            </div>
-            <span class="stack">Python · Pandas · Wordcloud</span>
-            <span class="chevron"></span>
-          </summary>
-          <div class="panel">
-            <img src="images/text-data.jpg" alt="YouTube Text Data Analysis" />
-            <div>
-              <p>Explores YouTube comments using sentiment analysis, word clouds, emoji decoding, and
-                engagement metrics like likes and comment counts, examining trends across content categories.</p>
-              <span class="stack-mobile">Python · Pandas · Matplotlib · Wordcloud</span>
-              <a class="view-link" href="https://github.com/SahithiKadudula/Text-Data-Analysis" target="_blank">View on GitHub →</a>
-            </div>
-          </div>
-        </details>
-
-        <details class="ledger-item">
-          <summary>
-            <div>
-              <span class="title">Geospatial Analysis of Zomato Orders</span>
-              <span class="tagline">Mapping delivery patterns and regional demand</span>
-            </div>
-            <span class="stack">Python · Geopandas · Folium</span>
-            <span class="chevron"></span>
-          </summary>
-          <div class="panel">
-            <img src="images/geo.jpg" alt="Geospatial Analysis of Zomato Orders" />
-            <div>
-              <p>Investigates Zomato's order data to identify location-based preferences, popular delivery
-                regions, and customer behavior, providing recommendations for optimizing delivery operations.</p>
-              <span class="stack-mobile">Python · Pandas · Geopandas · Matplotlib · Folium · Jupyter</span>
-              <a class="view-link" href="https://github.com/SahithiKadudula/Geospatial-Analysis" target="_blank">View on GitHub →</a>
-            </div>
-          </div>
-        </details>
-
-        <details class="ledger-item">
-          <summary>
-            <div>
-              <span class="title">Stock Price Analysis using Time Series</span>
-              <span class="tagline">Forecasting price behavior with ARIMA</span>
-            </div>
-            <span class="stack">Python · Statsmodels</span>
-            <span class="chevron"></span>
-          </summary>
-          <div class="panel">
-            <img src="images/stock.jpg" alt="Stock Price Analysis using Time Series" />
-            <div>
-              <p>Focuses on stock price data to understand trends using moving averages, stationarity tests,
-                and ARIMA modeling, producing forecasts that support investment decision-making.</p>
-              <span class="stack-mobile">Python · Pandas · Matplotlib · Statsmodels</span>
-              <a class="view-link" href="https://github.com/SahithiKadudula/Time-Series-Analysis" target="_blank">View on GitHub →</a>
-            </div>
-          </div>
-        </details>
-
-        <details class="ledger-item">
-          <summary>
-            <div>
-              <span class="title">Cyclistic Bike Share Analysis</span>
-              <span class="tagline">Rider behavior and route optimization</span>
-            </div>
-            <span class="stack">Python · Pandas</span>
-            <span class="chevron"></span>
-          </summary>
-          <div class="panel">
-            <img src="images/cyclistic.jpg" alt="Cyclistic Bike Share Analysis" />
-            <div>
-              <p>Investigates usage patterns of a bike-share service, uncovering insights into ride durations,
-                customer types, and popular routes to optimize operations and improve user satisfaction.</p>
-              <span class="stack-mobile">Python · Pandas · Matplotlib</span>
-              <a class="view-link" href="https://github.com/SahithiKadudula/Cyclistic-Bike-Share-Analysis" target="_blank">View on GitHub →</a>
-            </div>
-          </div>
-        </details>
-
-        <details class="ledger-item">
-          <summary>
-            <div>
-              <span class="title">Stack Overflow Developer Survey</span>
-              <span class="tagline">Developer trends and tooling preferences</span>
-            </div>
-            <span class="stack">SQL · IBM Cognos</span>
-            <span class="chevron"></span>
-          </summary>
-          <div class="panel">
-            <img src="images/stack.jpg" alt="Stack Overflow Developer Survey" />
-            <div>
-              <p>Explores developer trends, preferences, and demographics using IBM Cognos for visualization,
-                with SQL and Python handling data wrangling and preparation.</p>
-              <span class="stack-mobile">SQL · Python · IBM Cognos</span>
-              <a class="view-link" href="https://github.com/SahithiKadudula/IBM-PC-Capstone-Project" target="_blank">View on GitHub →</a>
-            </div>
-          </div>
-        </details>
-
-        <details class="ledger-item">
-          <summary>
-            <div>
-              <span class="title">Product Distribution</span>
-              <span class="tagline">Forecasting and supply chain simulation</span>
-            </div>
-            <span class="stack">Python</span>
-            <span class="chevron"></span>
-          </summary>
-          <div class="panel">
-            <img src="images/product.jpg" alt="Product Distribution" />
-            <div>
-              <p>Applies predictive analytics, time series forecasting, and prescriptive simulation to optimize
-                supply chain processes and distribution strategy.</p>
-              <span class="stack-mobile">Python</span>
-              <a class="view-link" href="https://github.com/SahithiKadudula/Product-Distribution" target="_blank">View on GitHub →</a>
-            </div>
-          </div>
-        </details>
-
-        <details class="ledger-item">
-          <summary>
-            <div>
-              <span class="title">Heart Failure Prediction</span>
-              <span class="tagline">Large-scale ML for early risk detection</span>
-            </div>
-            <span class="stack">PySpark</span>
-            <span class="chevron"></span>
-          </summary>
-          <div class="panel">
-            <img src="images/heart.jpg" alt="Heart Failure Prediction" />
-            <div>
-              <p>Uses PySpark to develop machine learning models predicting heart failure risk, with robust
-                data preparation and feature engineering supporting early detection strategies.</p>
-              <span class="stack-mobile">PySpark</span>
-              <a class="view-link" href="https://github.com/SahithiKadudula/Heart-Failure-Prediction-Project" target="_blank">View on GitHub →</a>
-            </div>
-          </div>
-        </details>
-
-        <details class="ledger-item">
-          <summary>
-            <div>
-              <span class="title">Tableau Dashboards</span>
-              <span class="tagline">Interactive visualizations across multiple domains</span>
-            </div>
-            <span class="stack">Tableau</span>
-            <span class="chevron"></span>
-          </summary>
-          <div class="panel">
-            <img src="images/tableau_public.png" alt="Tableau Dashboards" />
-            <div>
-              <p>A collection of dynamic dashboards designed for data exploration and storytelling, published
-                to Tableau Public.</p>
-              <span class="stack-mobile">Tableau</span>
-              <a class="view-link" href="https://public.tableau.com/app/profile/sahithi.kadudula/vizzes" target="_blank">View Tableau Public →</a>
-            </div>
-          </div>
-        </details>
-
-        <details class="ledger-item">
-          <summary>
-            <div>
-              <span class="title">Power BI Dashboards</span>
-              <span class="tagline">Data models and reports for business decisions</span>
-            </div>
-            <span class="stack">Power BI</span>
-            <span class="chevron"></span>
-          </summary>
-          <div class="panel">
-            <img src="images/powerbi.png" alt="Power BI Dashboards" />
-            <div>
-              <p>Visually compelling, interactive reports built on advanced data modeling to deliver clear,
-                actionable insight for stakeholders.</p>
-              <span class="stack-mobile">Power BI</span>
-              <a class="view-link" href="https://app.powerbi.com/groups/me/list?experience=power-bi" target="_blank">View Power BI →</a>
-            </div>
-          </div>
-        </details>
-
+      <div class="project-card">
+        <div class="thumb"><img src="images/text-data.jpg" alt="YouTube Text Data Analysis"></div>
+        <div class="body">
+          <h3>YouTube Text Data Analysis</h3>
+          <p>Sentiment analysis, word clouds, and engagement trends across YouTube comment data.</p>
+          <div class="tags"><span>Python</span><span>Pandas</span><span>Wordcloud</span></div>
+          <a class="go" href="https://github.com/SahithiKadudula/Text-Data-Analysis" target="_blank">View project →</a>
+        </div>
       </div>
-    </section>
 
-    <!-- Experience -->
-    <section id="experience">
-      <div class="kicker">Track record</div>
+      <div class="project-card">
+        <div class="thumb"><img src="images/geo.jpg" alt="Geospatial Analysis of Zomato Orders"></div>
+        <div class="body">
+          <h3>Geospatial Analysis of Zomato Orders</h3>
+          <p>Mapping food delivery patterns to uncover regional demand and customer behavior.</p>
+          <div class="tags"><span>Python</span><span>Geopandas</span><span>Folium</span></div>
+          <a class="go" href="https://github.com/SahithiKadudula/Geospatial-Analysis" target="_blank">View project →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="thumb"><img src="images/stock.jpg" alt="Stock Price Analysis using Time Series"></div>
+        <div class="body">
+          <h3>Stock Price Time Series</h3>
+          <p>Forecasting stock price behavior using moving averages and ARIMA modeling.</p>
+          <div class="tags"><span>Python</span><span>Statsmodels</span></div>
+          <a class="go" href="https://github.com/SahithiKadudula/Time-Series-Analysis" target="_blank">View project →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="thumb"><img src="images/cyclistic.jpg" alt="Cyclistic Bike Share Analysis"></div>
+        <div class="body">
+          <h3>Cyclistic Bike Share Analysis</h3>
+          <p>Rider behavior and route trends across a bike-share service.</p>
+          <div class="tags"><span>Python</span><span>Pandas</span></div>
+          <a class="go" href="https://github.com/SahithiKadudula/Cyclistic-Bike-Share-Analysis" target="_blank">View project →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="thumb"><img src="images/stack.jpg" alt="Stack Overflow Developer Survey"></div>
+        <div class="body">
+          <h3>Stack Overflow Developer Survey</h3>
+          <p>Developer trends and tooling preferences visualized with IBM Cognos.</p>
+          <div class="tags"><span>SQL</span><span>IBM Cognos</span></div>
+          <a class="go" href="https://github.com/SahithiKadudula/IBM-PC-Capstone-Project" target="_blank">View project →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="thumb"><img src="images/product.jpg" alt="Product Distribution"></div>
+        <div class="body">
+          <h3>Product Distribution</h3>
+          <p>Predictive analytics and simulation for supply chain and distribution strategy.</p>
+          <div class="tags"><span>Python</span></div>
+          <a class="go" href="https://github.com/SahithiKadudula/Product-Distribution" target="_blank">View project →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="thumb"><img src="images/heart.jpg" alt="Heart Failure Prediction"></div>
+        <div class="body">
+          <h3>Heart Failure Prediction</h3>
+          <p>Large-scale ML models for early detection of heart failure risk.</p>
+          <div class="tags"><span>PySpark</span></div>
+          <a class="go" href="https://github.com/SahithiKadudula/Heart-Failure-Prediction-Project" target="_blank">View project →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="thumb"><img src="images/tableau_public.png" alt="Tableau Dashboards"></div>
+        <div class="body">
+          <h3>Tableau Dashboards</h3>
+          <p>Interactive dashboards for data exploration and storytelling.</p>
+          <div class="tags"><span>Tableau</span></div>
+          <a class="go" href="https://public.tableau.com/app/profile/sahithi.kadudula/vizzes" target="_blank">View Tableau Public →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="thumb"><img src="images/powerbi.png" alt="Power BI Dashboards"></div>
+        <div class="body">
+          <h3>Power BI Dashboards</h3>
+          <p>Interactive reports built on advanced data modeling for stakeholder decisions.</p>
+          <div class="tags"><span>Power BI</span></div>
+          <a class="go" href="https://app.powerbi.com/groups/me/list?experience=power-bi" target="_blank">View Power BI →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Experience -->
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span> Track record</div>
       <h2>Experience</h2>
-      <div class="timeline">
+    </div>
+    <div class="timeline">
 
-        <div class="tl-item">
-          <div class="when">Apr 2025 – May 2026</div>
-          <div>
-            <h3>Data Analyst</h3>
-            <div class="org">Mastercard</div>
-            <ul>
-              <li>Built SQL/Python data pipelines to process transaction data, validate quality, and surface fraud patterns for ML models in an Agile/Scrum environment.</li>
-              <li>Tuned tiered cutoff frameworks for fraud ML models (XGBoost, Decision Trees), cutting fraudulent chargebacks <mark>22%</mark> and improving detection accuracy <mark>15%</mark> via 50+ predictive features.</li>
-              <li>Designed and ran online A/B experiments on fraud alert thresholds to measure conversion/fraud impact and drive pipeline strategy updates.</li>
-              <li>Owned end-to-end SQL/Python data workflow, defined KPIs, enforced data governance, and built Tableau dashboards for stakeholder reporting.</li>
-              <li>Maintained fraud datasets in AWS Redshift and Snowflake, contributing to data warehouse design and data modeling for loss-forecasting analysis.</li>
-              <li>Applied NLP (SpaCy) for anomaly detection and used Claude Code to debug and validate pipeline scripts, reducing manual review effort.</li>
-            </ul>
-          </div>
+      <div class="tl-item">
+        <div class="when">Apr 2025 – May 2026</div>
+        <div>
+          <h3>Data Analyst</h3>
+          <div class="org">Mastercard</div>
+          <ul>
+            <li>Built SQL/Python data pipelines to process transaction data, validate quality, and surface fraud patterns for ML models in an Agile/Scrum environment.</li>
+            <li>Tuned tiered cutoff frameworks for fraud ML models (XGBoost, Decision Trees), cutting fraudulent chargebacks <mark>22%</mark> and improving detection accuracy <mark>15%</mark> via 50+ predictive features.</li>
+            <li>Designed and ran online A/B experiments on fraud alert thresholds to measure conversion/fraud impact and drive pipeline strategy updates.</li>
+            <li>Owned end-to-end SQL/Python data workflow, defined KPIs, enforced data governance, and built Tableau dashboards for stakeholder reporting.</li>
+            <li>Maintained fraud datasets in AWS Redshift and Snowflake, contributing to data warehouse design and data modeling for loss-forecasting analysis.</li>
+            <li>Applied NLP (SpaCy) for anomaly detection and used Claude Code to debug and validate pipeline scripts, reducing manual review effort.</li>
+          </ul>
         </div>
-
-        <div class="tl-item">
-          <div class="when">Oct 2024 – Apr 2025</div>
-          <div>
-            <h3>Data Analyst Intern</h3>
-            <div class="org">American Express</div>
-            <ul>
-              <li>Developed ETL workflows for financial data processing in SQL and Snowflake, improving data integrity by <mark>30%</mark>.</li>
-              <li>Designed and deployed financial dashboards in Tableau, boosting operational efficiency and tracking revenue growth.</li>
-              <li>Conducted data-driven risk analysis and predictive modeling to support financial investment decisions.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="tl-item">
-          <div class="when">Sep 2023 – Aug 2024</div>
-          <div>
-            <h3>Research Analyst</h3>
-            <div class="org">Texas State University</div>
-            <ul>
-              <li>Designed Power BI dashboards to track academic KPIs, improving graduation rates by <mark>15%</mark>.</li>
-              <li>Developed predictive models in Python and SQL to forecast student success and retention.</li>
-              <li>Improved student GPA <mark>23%</mark> and retention <mark>25%</mark> through analysis of performance and attrition factors.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="tl-item">
-          <div class="when">Jan 2023 – Sep 2023</div>
-          <div>
-            <h3>Graduate Assistant</h3>
-            <div class="org">Texas State University</div>
-            <ul>
-              <li>Built Excel pivot-table dashboards tracking 5,000+ logs, cutting response times by <mark>15%</mark>.</li>
-              <li>Created Power BI dashboards using Power Query for ETL, driving insights behind 13 new academic programs.</li>
-              <li>Built Power Apps and automated approvals/notifications via Power Automate across SharePoint and Teams, cutting manual effort <mark>30%</mark>.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="tl-item">
-          <div class="when">Dec 2020 – Oct 2022</div>
-          <div>
-            <h3>Data Analyst</h3>
-            <div class="org">Cybage Software — Accommodation Plus International</div>
-            <ul>
-              <li>Translated stakeholder business needs into data-driven pipeline requirements, ensuring measurable ROI.</li>
-              <li>Optimized ETL workflows using Python, Azure Data Factory, and Airflow, improving efficiency by <mark>30%</mark>.</li>
-              <li>Scheduled and monitored batch pipelines via Airflow DAGs in an Agile delivery model for reliable data ingestion.</li>
-              <li>Transformed booking/revenue datasets with PySpark in Databricks, structuring Delta Lake tables for analytics architecture.</li>
-              <li>Built Tableau dashboards and revenue models, generating <mark>$200K+</mark> in revenue and cutting chargeback costs 5%.</li>
-              <li>Developed predictive/forecasting models (KNN, regression) in Databricks for revenue and customer analytics.</li>
-            </ul>
-          </div>
-        </div>
-
       </div>
-    </section>
 
-    <!-- Education -->
-    <section id="education">
-      <div class="kicker">Education</div>
-      <h2>Education</h2>
+      <div class="tl-item">
+        <div class="when">Oct 2024 – Apr 2025</div>
+        <div>
+          <h3>Data Analyst Intern</h3>
+          <div class="org">American Express</div>
+          <ul>
+            <li>Developed ETL workflows for financial data processing in SQL and Snowflake, improving data integrity by <mark>30%</mark>.</li>
+            <li>Designed and deployed financial dashboards in Tableau, boosting operational efficiency and tracking revenue growth.</li>
+            <li>Conducted data-driven risk analysis and predictive modeling to support financial investment decisions.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="when">Sep 2023 – Aug 2024</div>
+        <div>
+          <h3>Research Analyst</h3>
+          <div class="org">Texas State University</div>
+          <ul>
+            <li>Designed Power BI dashboards to track academic KPIs, improving graduation rates by <mark>15%</mark>.</li>
+            <li>Developed predictive models in Python and SQL to forecast student success and retention.</li>
+            <li>Improved student GPA <mark>23%</mark> and retention <mark>25%</mark> through analysis of performance and attrition factors.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="when">Jan 2023 – Sep 2023</div>
+        <div>
+          <h3>Graduate Assistant</h3>
+          <div class="org">Texas State University</div>
+          <ul>
+            <li>Built Excel pivot-table dashboards tracking 5,000+ logs, cutting response times by <mark>15%</mark>.</li>
+            <li>Created Power BI dashboards using Power Query for ETL, driving insights behind 13 new academic programs.</li>
+            <li>Built Power Apps and automated approvals/notifications via Power Automate across SharePoint and Teams, cutting manual effort <mark>30%</mark>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="when">Dec 2020 – Oct 2022</div>
+        <div>
+          <h3>Data Analyst</h3>
+          <div class="org">Cybage Software — Accommodation Plus International</div>
+          <ul>
+            <li>Translated stakeholder business needs into data-driven pipeline requirements, ensuring measurable ROI.</li>
+            <li>Optimized ETL workflows using Python, Azure Data Factory, and Airflow, improving efficiency by <mark>30%</mark>.</li>
+            <li>Scheduled and monitored batch pipelines via Airflow DAGs in an Agile delivery model for reliable data ingestion.</li>
+            <li>Transformed booking/revenue datasets with PySpark in Databricks, structuring Delta Lake tables for analytics architecture.</li>
+            <li>Built Tableau dashboards and revenue models, generating <mark>$200K+</mark> in revenue and cutting chargeback costs 5%.</li>
+            <li>Developed predictive/forecasting models (KNN, regression) in Databricks for revenue and customer analytics.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Education + Certifications -->
+<section id="education">
+  <div class="wrap">
+    <div class="grid-2">
       <div>
-        <div class="edu-row">
+        <div class="section-head">
+          <div class="eyebrow"><span class="dot"></span> Education</div>
+          <h2>Education</h2>
+        </div>
+        <div class="info-card">
           <h3>Master of Science, Data Analytics and Information Systems</h3>
           <div class="org">Texas State University, San Marcos, TX</div>
           <div class="when">Graduated Aug 2024 · GPA 3.80</div>
         </div>
-        <div class="edu-row">
+        <div class="info-card">
           <h3>Bachelor of Technology, Computer Science</h3>
           <div class="org">Jawaharlal Nehru Technological University, Hyderabad, India</div>
           <div class="when">Graduated Sep 2020 · GPA 3.50</div>
         </div>
       </div>
-    </section>
-
-    <!-- Certifications -->
-    <section id="certifications">
-      <div class="kicker">Certifications</div>
-      <h2>Certifications</h2>
-      <ul class="cert-list">
-        <li>Tableau Desktop Specialist</li>
-        <li>Google Data Analytics Professional Certificate</li>
-        <li>IBM Data Analyst Professional Certificate</li>
-        <li>ServiceNow Certified System Administrator</li>
-        <li>Claude Code in Action</li>
-        <li>Building Customized LLMs with OpenAI</li>
-      </ul>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact">
-      <div class="kicker">Get in touch</div>
-      <h2>Let's talk about data.</h2>
-      <p class="lede">Open to data analyst and analytics engineering roles. Reach out directly, or find me on the platforms below.</p>
-      <div class="contact-grid">
-        <a href="mailto:sahithikadudula@gmail.com">Email <span class="arrow">→</span></a>
-        <a href="https://www.linkedin.com/in/sahithi-kadudula-72403236b" target="_blank">LinkedIn <span class="arrow">→</span></a>
+      <div>
+        <div class="section-head">
+          <div class="eyebrow"><span class="dot"></span> Certifications</div>
+          <h2>Certifications</h2>
+        </div>
+        <div class="cert-grid">
+          <div class="cert-card"><span class="chip"></span>Tableau Desktop Specialist</div>
+          <div class="cert-card"><span class="chip"></span>Google Data Analytics Professional Certificate</div>
+          <div class="cert-card"><span class="chip"></span>IBM Data Analyst Professional Certificate</div>
+          <div class="cert-card"><span class="chip"></span>ServiceNow Certified System Administrator</div>
+          <div class="cert-card"><span class="chip"></span>Claude Code in Action</div>
+          <div class="cert-card"><span class="chip"></span>Building Customized LLMs with OpenAI</div>
+        </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
-  </main>
-</div>
+<!-- Contact -->
+<section id="contact">
+  <div class="eyebrow"><span class="dot"></span> Get in touch</div>
+  <h2>Let's talk about data.</h2>
+  <p>Open to data analyst and analytics engineering roles. Reach out directly by email or connect on LinkedIn.</p>
+  <div class="contact-buttons">
+    <a href="mailto:sahithikadudula@gmail.com">Email me</a>
+    <a class="ghost" href="https://www.linkedin.com/in/sahithikadudula" target="_blank">LinkedIn</a>
+  </div>
+</section>
 
 </body>
 </html>
